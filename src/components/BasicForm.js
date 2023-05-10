@@ -40,6 +40,7 @@ const BasicForm = () => {
         onBlur={handleBlur} 
         className={errors.email && touched.email ? "input-error" : ""} //dynimically adding class. checking email for errors. If errors, input error, if error-free then leave empty. added styles to css file. touched is tracking if user is in field or not. now checking if errors and if touched..
       />
+      {errors.email && touched.email && <p className="error">{errors.email}</p>} 
       <label htmlFor="age">Age</label>
       <input
         id="age"
@@ -83,4 +84,4 @@ export default BasicForm;
 //... now I can remove the many instances of formik. in my <input sections.
 
 //form validation by using Yup library. First must create schema to define the different initialValues properties and the type they should be. 
-//
+//updated error validation to include my specific error messages. added after each <imput section.. checks for same thing and if true outputs a paragraph tag to display the error with a className to style it.

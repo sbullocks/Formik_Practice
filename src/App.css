@@ -93,3 +93,8 @@ input.input-error,
 select.inut-error {
   border-color: red;
 }
+
+/* added css for isSubmitting */
+button:disabled {
+  opacity: 0.35;
+}

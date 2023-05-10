@@ -1,13 +1,17 @@
 import { useFormik } from "formik";
 import { basicSchema } from "../schemas";
 
-const onSubmit = () => {
+const onSubmit = async (values, actions) => {
   console.log("submitted");
+  console.log(values); //allows me to see the values once submitted
+  console.log(actions); //allows me to see the different formik helpers/methods that lets me interact with the form. I need the resetForm action. 
+  await new Promise((resolve) => setTimeout(resolve, 1000)); //need to mimic an API request. Had to add async bc this request is await. 
+  actions.resetForm(); //waits one second and then resets the form.
 };
 
 //storing the values we need for the form.
 const BasicForm = () => {
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+  const { values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit } =
     useFormik({
       initialValues: {
         email: "",
@@ -77,12 +81,13 @@ const BasicForm = () => {
         }
       />
       {errors.confirmPassword && touched.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
-      <button type="submit">Submit</button>
+      <button disabled={isSubmitting} type="submit">Submit</button> 
     </form>
   );
 };
 export default BasicForm;
 
+//NOTES: 
 //useFormik() is a custom React hook that will return all Formik state and helpers directly.
 //Line 26. console.log(formik); to see the form state and different helpers. methods like touched, sumbmitting...
 //we can destructor the following so that we do not have to keep rewriting formik.values.x - value={formik.values.age}.
@@ -90,4 +95,9 @@ export default BasicForm;
 //... now I can remove the many instances of formik. in my <input sections.
 
 //form validation by using Yup library. First must create schema to define the different initialValues properties and the type they should be.
-//updated error validation to include my specific error messages. added after each <imput section.. checks for same thing and if true outputs a paragraph tag to display the error with a className to style it.
+//updated error validation to include my specific error messages from the schemas. added after each <imput section.. checks for same thing and if true outputs a paragraph tag to display the error with a className to style it.
+
+//need to add a onSubmit function bc without this when the user submits, the fields are still filled with their information. I want to clear the fields onSubmit.
+//added the resetForm() action with await/async to reset form after 1 second from user submission if all is valid.
+
+//adding onSubmitting function so user experience can tell the form isSubmitting rahter than nothing happening when pressing submit. When the urser selects submit button, its true. disabled={isSubmitting} in line 84. Also added css for visual experience - lowered the opacity for a blurred affect.

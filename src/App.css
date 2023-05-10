@@ -87,3 +87,9 @@ button {
   font-weight: bold;
   cursor: pointer;
 }
+
+/* added css for error handling */
+input.input-error,
+select.inut-error {
+  border-color: red;
+}

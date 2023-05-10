@@ -1,9 +1,13 @@
 import { useFormik } from "formik";
 import { basicSchema } from "../schemas";
 
+const onSubmit = () => {
+  console.log("submitted");
+};
+
 //storing the values we need for the form.
 const BasicForm = () => {
-  const { values, handleBlur, handleChange } = useFormik({
+  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: {
       email: "",
       age: "",
@@ -11,17 +15,21 @@ const BasicForm = () => {
       confirmPassword: "",
     },
     validationSchema: basicSchema, //must import above so it pulls in from index.js. 
+    onSubmit, //defined above. Need to validate errors.
+
     // onSubmit: (values) => {
     //   alert(JSON.stringify(values, null, 2));
     // },
   });
 
+  console.log(errors);
   // console.log(useFormic); 
   // console.log(values.email); 
 
   //the below inputs are tracking the different values.
   return (
-    <form autoComplete="off">
+    //when the form is submitted, onSubmit will call the formik handleSubmit and it will call the onSubmit handler function above.
+    <form onSubmit={handleSubmit} autoComplete="off"> 
       <label htmlFor="email">Email</label>
       <input
         value={values.email}
@@ -30,6 +38,7 @@ const BasicForm = () => {
         type="email"
         placeholder="Enter your email"
         onBlur={handleBlur} 
+        className={errors.email ? "input-error" : ""} //dynimically adding class. checking email for errors. If errors, input error, if error-free then leave empty. added styles to css file.
       />
       <label htmlFor="age">Age</label>
       <input
@@ -65,7 +74,7 @@ const BasicForm = () => {
 export default BasicForm;
 
 //useFormik() is a custom React hook that will return all Formik state and helpers directly.
-//Line 17. console.log(formik); to see the form state and different helpers. methods like touched, sumbmitting...
+//Line 26. console.log(formik); to see the form state and different helpers. methods like touched, sumbmitting...
 //we can destructor the following so that we do not have to keep rewriting formik.values.x - value={formik.values.age}.
 //... on line 5: const formik = useFormik({ .. this is where you destructor and add the properties and methods needed. example: const {values, handleBlur, handleChange} = useFormik({ .
 //... now I can remove the many instances of formik. in my <input sections.

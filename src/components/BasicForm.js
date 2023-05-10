@@ -7,7 +7,7 @@ const onSubmit = () => {
 
 //storing the values we need for the form.
 const BasicForm = () => {
-  const { values, errors, handleBlur, handleChange, handleSubmit } = useFormik({
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
     initialValues: {
       email: "",
       age: "",
@@ -38,7 +38,7 @@ const BasicForm = () => {
         type="email"
         placeholder="Enter your email"
         onBlur={handleBlur} 
-        className={errors.email ? "input-error" : ""} //dynimically adding class. checking email for errors. If errors, input error, if error-free then leave empty. added styles to css file.
+        className={errors.email && touched.email ? "input-error" : ""} //dynimically adding class. checking email for errors. If errors, input error, if error-free then leave empty. added styles to css file. touched is tracking if user is in field or not. now checking if errors and if touched..
       />
       <label htmlFor="age">Age</label>
       <input
@@ -48,6 +48,7 @@ const BasicForm = () => {
         value={values.age}
         onChange={handleChange}
         onBlur={handleBlur} //validates the form when you click off the field.
+        className={errors.age && touched.age ? "input-error" : ""}
       />
       <label htmlFor="password">Password</label>
       <input
@@ -57,6 +58,7 @@ const BasicForm = () => {
         value={values.password}
         onChange={handleChange}
         onBlur={handleBlur}
+        className={errors.password && touched.password ? "input-error" : ""}
       />
       <label htmlFor="confirmPassword">Confirm Password</label>
       <input
@@ -66,6 +68,7 @@ const BasicForm = () => {
         value={values.confirmPassword}
         onChange={handleChange}
         onBlur={handleBlur}
+        className={errors.confirmPassword && touched.confirmPassword ? "input-error" : ""}
       />
       <button type="submit">Submit</button>
     </form>

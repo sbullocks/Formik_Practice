@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 
 //storing the values we need for the form.
 const BasicForm = () => {
-  const formik = useFormik({
+  const { values, handleBlur, handleChange } formik = useFormik({
     initialValues: {
       email: "",
       age: "",
@@ -20,39 +20,39 @@ const BasicForm = () => {
     <form autoComplete="off">
       <label htmlFor="email">Email</label>
       <input
-        value={formik.values.email}
-        onChange={formik.handleChange}
+        value={form.values.email}
+        onChange={handleChange}
         id="email"
         type="email"
         placeholder="Enter your email"
-        onBlur={formik.handleBlur} 
+        onBlur={handleBlur} 
       />
       <label htmlFor="age">Age</label>
       <input
         id="age"
         type="number"
         placeholder="Enter your age"
-        value={formik.values.age}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur} //validates the form when you click off the field.
+        value={values.age}
+        onChange={handleChange}
+        onBlur={handleBlur} //validates the form when you click off the field.
       />
       <label htmlFor="password">Password</label>
       <input
         id="password"
         type="password"
         placeholder="Enter your password"
-        value={formik.values.password}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
+        value={values.password}
+        onChange={handleChange}
+        onBlur={handleBlur}
       />
       <label htmlFor="confirmPassword">Confirm Password</label>
       <input
         id="confirmPassword"
         type="password"
         placeholder="Confirm Password"
-        value={formik.values.confirmPassword}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
+        value={values.confirmPassword}
+        onChange={handleChange}
+        onBlur={handleBlur}
       />
       <button type="submit">Submit</button>
     </form>
@@ -62,3 +62,6 @@ export default BasicForm;
 
 //useFormik() is a custom React hook that will return all Formik state and helpers directly.
 //Line 15. console.log(formik); to see the form state and different helpers. methods like touched, sumbmitting...
+//we can destructor the following so that we do not have to keep rewriting formik.values.x - value={formik.values.age}.
+//... on line 5: const formik = useFormik({ .. this is where you destructor and add the properties and methods needed. example: const {values, handleBlur, handleChange} = useFormik({ .
+//... now I can remove the many instances of formik. in my <input sections.

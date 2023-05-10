@@ -101,3 +101,5 @@ export default BasicForm;
 //added the resetForm() action with await/async to reset form after 1 second from user submission if all is valid.
 
 //adding onSubmitting function so user experience can tell the form isSubmitting rahter than nothing happening when pressing submit. When the urser selects submit button, its true. disabled={isSubmitting} in line 84. Also added css for visual experience - lowered the opacity for a blurred affect.
+
+//BasicForm: tested, works and completed. Moving onto advanced form. 

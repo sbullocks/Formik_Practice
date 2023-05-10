@@ -1,4 +1,5 @@
 import { useFormik } from "formik";
+import { basicSchema } from "../schemas";
 
 //storing the values we need for the form.
 const BasicForm = () => {
@@ -9,9 +10,10 @@ const BasicForm = () => {
       password: "",
       confirmPassword: "",
     },
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
-    },
+    validationSchema: basicSchema, //must import above so it pulls in from index.js. 
+    // onSubmit: (values) => {
+    //   alert(JSON.stringify(values, null, 2));
+    // },
   });
 
   // console.log(useFormic); 

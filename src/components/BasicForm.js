@@ -7,29 +7,30 @@ const onSubmit = () => {
 
 //storing the values we need for the form.
 const BasicForm = () => {
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit } = useFormik({
-    initialValues: {
-      email: "",
-      age: "",
-      password: "",
-      confirmPassword: "",
-    },
-    validationSchema: basicSchema, //must import above so it pulls in from index.js. 
-    onSubmit, //defined above. Need to validate errors.
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
+    useFormik({
+      initialValues: {
+        email: "",
+        age: "",
+        password: "",
+        confirmPassword: "",
+      },
+      validationSchema: basicSchema, //must import above so it pulls in from index.js.
+      onSubmit, //defined above. Need to validate errors.
 
-    // onSubmit: (values) => {
-    //   alert(JSON.stringify(values, null, 2));
-    // },
-  });
+      // onSubmit: (values) => {
+      //   alert(JSON.stringify(values, null, 2));
+      // },
+    });
 
   console.log(errors);
-  // console.log(useFormic); 
-  // console.log(values.email); 
+  // console.log(useFormic);
+  // console.log(values.email);
 
   //the below inputs are tracking the different values.
   return (
     //when the form is submitted, onSubmit will call the formik handleSubmit and it will call the onSubmit handler function above.
-    <form onSubmit={handleSubmit} autoComplete="off"> 
+    <form onSubmit={handleSubmit} autoComplete="off">
       <label htmlFor="email">Email</label>
       <input
         value={values.email}
@@ -37,10 +38,10 @@ const BasicForm = () => {
         id="email"
         type="email"
         placeholder="Enter your email"
-        onBlur={handleBlur} 
+        onBlur={handleBlur}
         className={errors.email && touched.email ? "input-error" : ""} //dynimically adding class. checking email for errors. If errors, input error, if error-free then leave empty. added styles to css file. touched is tracking if user is in field or not. now checking if errors and if touched..
       />
-      {errors.email && touched.email && <p className="error">{errors.email}</p>} 
+      {errors.email && touched.email && <p className="error">{errors.email}</p>}
       <label htmlFor="age">Age</label>
       <input
         id="age"
@@ -51,6 +52,7 @@ const BasicForm = () => {
         onBlur={handleBlur} //validates the form when you click off the field.
         className={errors.age && touched.age ? "input-error" : ""}
       />
+      {errors.age && touched.age && <p className="error">{errors.age}</p>}
       <label htmlFor="password">Password</label>
       <input
         id="password"
@@ -61,6 +63,7 @@ const BasicForm = () => {
         onBlur={handleBlur}
         className={errors.password && touched.password ? "input-error" : ""}
       />
+      {errors.password && touched.password && <p className="error">{errors.password}</p>}
       <label htmlFor="confirmPassword">Confirm Password</label>
       <input
         id="confirmPassword"
@@ -69,8 +72,11 @@ const BasicForm = () => {
         value={values.confirmPassword}
         onChange={handleChange}
         onBlur={handleBlur}
-        className={errors.confirmPassword && touched.confirmPassword ? "input-error" : ""}
+        className={
+          errors.confirmPassword && touched.confirmPassword ? "input-error" : ""
+        }
       />
+      {errors.confirmPassword && touched.confirmPassword && <p className="error">{errors.confirmPassword}</p>}
       <button type="submit">Submit</button>
     </form>
   );
@@ -83,5 +89,5 @@ export default BasicForm;
 //... on line 5: const formik = useFormik({ .. this is where you destructor and add the properties and methods needed. example: const {values, handleBlur, handleChange} = useFormik({ .
 //... now I can remove the many instances of formik. in my <input sections.
 
-//form validation by using Yup library. First must create schema to define the different initialValues properties and the type they should be. 
+//form validation by using Yup library. First must create schema to define the different initialValues properties and the type they should be.
 //updated error validation to include my specific error messages. added after each <imput section.. checks for same thing and if true outputs a paragraph tag to display the error with a className to style it.

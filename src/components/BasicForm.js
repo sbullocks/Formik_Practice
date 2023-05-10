@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 
 //storing the values we need for the form.
 const BasicForm = () => {
-  const { values, handleBlur, handleChange } formik = useFormik({
+  const { values, handleBlur, handleChange } = useFormik({
     initialValues: {
       email: "",
       age: "",
@@ -14,13 +14,15 @@ const BasicForm = () => {
     },
   });
 
-  console.log(formik); 
+  // console.log(useFormic); 
+  // console.log(values.email); 
+
   //the below inputs are tracking the different values.
   return (
     <form autoComplete="off">
       <label htmlFor="email">Email</label>
       <input
-        value={form.values.email}
+        value={values.email}
         onChange={handleChange}
         id="email"
         type="email"
@@ -61,7 +63,10 @@ const BasicForm = () => {
 export default BasicForm;
 
 //useFormik() is a custom React hook that will return all Formik state and helpers directly.
-//Line 15. console.log(formik); to see the form state and different helpers. methods like touched, sumbmitting...
+//Line 17. console.log(formik); to see the form state and different helpers. methods like touched, sumbmitting...
 //we can destructor the following so that we do not have to keep rewriting formik.values.x - value={formik.values.age}.
 //... on line 5: const formik = useFormik({ .. this is where you destructor and add the properties and methods needed. example: const {values, handleBlur, handleChange} = useFormik({ .
 //... now I can remove the many instances of formik. in my <input sections.
+
+//form validation by using Yup library. First must create schema to define the different initialValues properties and the type they should be. 
+//

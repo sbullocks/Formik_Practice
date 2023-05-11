@@ -11,10 +11,12 @@
 
 import { Field, Form, Formik } from "formik";
 import CustomInput from "./CustomInput";
+import { advancedSchema } from "../schemas";
 
 const AdvancedForm = () => {
   return (
-    <Formik initialValues={{ username: "jared" }}>
+    <Formik initialValues={{ username: "", jobType: "", acceptedTos: false }}
+    validationSchema={advancedSchema}>
       {(props) => (
         <Form>
           <CustomInput 
@@ -60,3 +62,4 @@ export default AdvancedForm;
 //*Whatever I define in the state, I must use same properties in the name.
 
 //need to add to schema.
+//need to allow advancedSchema to be access. This is done through validationSchema={advancedSchema}.

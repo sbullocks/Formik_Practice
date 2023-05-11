@@ -30,4 +30,4 @@ export const advancedSchema = yup.object().shape({
 //Schema are comprised of parsing actions (transforms) as well as assertions (tests) about the input value. Validate an input value to parse it and run the configured set of assertions. Chain together methods to build a schema.
 
 //adding to schemas after updating AdvancedForm.js & CustomInput.js.
-//added schemas for advancedSchema.
+//added advancedSchema.

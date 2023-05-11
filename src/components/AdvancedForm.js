@@ -10,22 +10,36 @@
 // import React from "react";
 
 import { Field, Form, Formik } from "formik";
+import { advancedSchema } from "../schemas";
 import CustomInput from "./CustomInput";
 import CustomSelect from "./CustomSelect";
-import { advancedSchema } from "../schemas";
 
 const AdvancedForm = () => {
   return (
-    <Formik initialValues={{ username: "", jobType: "", acceptedTos: false }}
-    validationSchema={advancedSchema}>
+    <Formik
+      initialValues={{ username: "", jobType: "", acceptedTos: false }}
+      validationSchema={advancedSchema}
+    >
       {(props) => (
         <Form>
-          <CustomInput 
-          label="Username" 
-          name="username"
-          type="text"
-          placeholder="Enter your username"
+          <CustomInput
+            label="Username"
+            name="username"
+            type="text"
+            placeholder="Enter your username"
           />
+          <CustomSelect
+            label="Job Type"
+            name="jobType"
+            placeholder="Please select a job"
+          >
+            <option value="">Please select a job type</option>
+            <option value="developer">Developer</option>
+            <option value="designer">Designer</option>
+            <option value="manager">Product Manager</option>
+            <option value="other">Other</option>
+          </CustomSelect>
+
           {/* <Field type="text" name="name" placeholder="Name" /> */}
           {/* Do not have to pass these in anymore as Formik know that a Form has access to the helper methods.
               <input
@@ -35,12 +49,13 @@ const AdvancedForm = () => {
             value={props.values.name}
             name="name"
           /> */}
+
           <button type="submit">Submit</button>
         </Form>
       )}
     </Formik>
   );
-      };
+};
 
 export default AdvancedForm;
 
@@ -58,7 +73,6 @@ export default AdvancedForm;
 //Cannot configure with class name and attributes like normal. Rather we can render a Field component with children. Gives me access to different properties. Ex: field, form, meta. Define the input such as class name.
 //Created a custom field instead.
 
-
 //Working with CustomInput.js file to implement a custom field (properties).
 //*Whatever I define in the state, I must use same properties in the name.
 
@@ -66,3 +80,5 @@ export default AdvancedForm;
 //need to allow advancedSchema to be access. This is done through validationSchema={advancedSchema}.
 
 //tested and app works with AdvancedForm. Moving onto CustomSelect - works just like CustomInput.
+//added options for the jobType so the user can select from the dropdown list.
+//the options are children of the CustomSelect.

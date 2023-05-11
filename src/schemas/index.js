@@ -11,9 +11,23 @@ export const basicSchema = yup.object().shape({ //must export so it can be used 
     confirmPassword: yup.string().oneOf([yup.ref('password'), null], "Passwords must match").required("Required"), //ref refers to the original value entered. null if does not match original.
 });
 
+export const advancedSchema = yup.object().shape({
+    username: yup
+      .string()
+      .min(3, "Username must be at least 3 characters long")
+      .required("Required"),
+    jobType: yup
+      .string()
+      .oneOf(["designer", "developer", "manager", "other"], "Invalid Job Type")
+      .required("Required"),
+    acceptedTos: yup
+      .boolean()
+      .oneOf([true], "Please accept the terms of service"),
+  });
 
 
 //Yup is a schema builder for runtime value parsing and validation. Define a schema, transform a value to match, assert the shape of an existing value, or both.
 //Schema are comprised of parsing actions (transforms) as well as assertions (tests) about the input value. Validate an input value to parse it and run the configured set of assertions. Chain together methods to build a schema.
 
 //adding to schemas after updating AdvancedForm.js & CustomInput.js.
+//added schemas for advancedSchema.

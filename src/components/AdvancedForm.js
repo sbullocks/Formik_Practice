@@ -11,6 +11,7 @@
 
 import { Field, Form, Formik } from "formik";
 import CustomInput from "./CustomInput";
+import CustomSelect from "./CustomSelect";
 import { advancedSchema } from "../schemas";
 
 const AdvancedForm = () => {
@@ -58,10 +59,10 @@ export default AdvancedForm;
 //Created a custom field instead.
 
 
-//Working with CustomInputs.js file to implement a custom field (properties).
+//Working with CustomInput.js file to implement a custom field (properties).
 //*Whatever I define in the state, I must use same properties in the name.
 
 //need to add to schema.
 //need to allow advancedSchema to be access. This is done through validationSchema={advancedSchema}.
 
-
+//tested and app works with AdvancedForm. Moving onto CustomSelect - works just like CustomInput.

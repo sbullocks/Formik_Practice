@@ -33,4 +33,4 @@ export default CustomInput;
 //added css for error validation.
 //if its true and there is a error, the css will reflect and a div will display the error.
 //
-//
+//CustomSelect works just like this form.

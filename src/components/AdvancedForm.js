@@ -7,16 +7,23 @@
 //   );
 // };
 
-import React from "react";
-import { Field, Form, Formik } from "formik";
+// import React from "react";
 
-const AdvancedForm = () => (
-  <div>
-    <h1>My Form</h1>
-    <Formik initialValues={{ name: "this is awesome" }}>
+import { Field, Form, Formik } from "formik";
+import CustomInput from "./CustomInput";
+
+const AdvancedForm = () => {
+  return (
+    <Formik initialValues={{ username: "jared" }}>
       {(props) => (
         <Form>
-          <Field type="text" name="name" placeholder="Name" /> 
+          <CustomInput 
+          label="Username" 
+          name="username"
+          type="text"
+          placeholder="Enter your username"
+          />
+          {/* <Field type="text" name="name" placeholder="Name" /> */}
           {/* Do not have to pass these in anymore as Formik know that a Form has access to the helper methods.
               <input
             type="text"
@@ -29,8 +36,9 @@ const AdvancedForm = () => (
         </Form>
       )}
     </Formik>
-  </div>
-);
+  );
+      };
+
 export default AdvancedForm;
 
 //NOTES:
@@ -45,5 +53,10 @@ export default AdvancedForm;
 //Whatever I define in the state, I must use same properties in the name.
 //Children can either be an array of elements (e.g. <option> in the case of <Field as="select">) or a callback function (a.k.a render prop). Read more in docs about what objects are contained in the render props.
 //Cannot configure with class name and attributes like normal. Rather we can render a Field component with children. Gives me access to different properties. Ex: field, form, meta. Define the input such as class name.
-//Created a custom field instead. 
-//
+//Created a custom field instead.
+
+
+//Working with CustomInputs.js file to implement a custom field (properties).
+//*Whatever I define in the state, I must use same properties in the name.
+
+//need to add to schema.

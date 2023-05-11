@@ -15,3 +15,5 @@ export const basicSchema = yup.object().shape({ //must export so it can be used 
 
 //Yup is a schema builder for runtime value parsing and validation. Define a schema, transform a value to match, assert the shape of an existing value, or both.
 //Schema are comprised of parsing actions (transforms) as well as assertions (tests) about the input value. Validate an input value to parse it and run the configured set of assertions. Chain together methods to build a schema.
+
+//adding to schemas after updating AdvancedForm.js & CustomInput.js.

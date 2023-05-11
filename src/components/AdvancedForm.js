@@ -13,14 +13,21 @@ import { Field, Form, Formik } from "formik";
 import { advancedSchema } from "../schemas";
 import CustomInput from "./CustomInput";
 import CustomSelect from "./CustomSelect";
+import CustomCheckbox from "./CustomCheckbox";
+
+const onSubmit = async (values, actions) => {
+   await new Promise((resolve) => setTimeout(resolve, 1000)); //need to mimic an API request. Had to add async bc this request is await. 
+  actions.resetForm(); //waits one second and then resets the form.
+};
 
 const AdvancedForm = () => {
   return (
     <Formik
       initialValues={{ username: "", jobType: "", acceptedTos: false }}
       validationSchema={advancedSchema}
+      onSubmit={onSubmit}
     >
-      {(props) => (
+      {({isSubmitting}) => (
         <Form>
           <CustomInput
             label="Username"
@@ -39,7 +46,7 @@ const AdvancedForm = () => {
             <option value="manager">Product Manager</option>
             <option value="other">Other</option>
           </CustomSelect>
-
+          <CustomCheckbox type="checkbox" name="acceptedTos" />
           {/* <Field type="text" name="name" placeholder="Name" /> */}
           {/* Do not have to pass these in anymore as Formik know that a Form has access to the helper methods.
               <input
@@ -50,7 +57,7 @@ const AdvancedForm = () => {
             name="name"
           /> */}
 
-          <button type="submit">Submit</button>
+          <button disabled={isSubmitting} type="submit">Submit</button>
         </Form>
       )}
     </Formik>
@@ -81,4 +88,12 @@ export default AdvancedForm;
 
 //tested and app works with AdvancedForm. Moving onto CustomSelect - works just like CustomInput.
 //added options for the jobType so the user can select from the dropdown list.
-//the options are children of the CustomSelect.
+//the options are children of the CustomSelect. these values are defined in the schema.
+
+//tested and app works properly. Moving on to adding a checkbox.
+//added checkbox for TOS.
+
+//added onSubmit for when user submits the form.
+//props has access to form and form state, including when the form isSubmitting. Changed props to isSubmitting. This will have a visual affect when submitting the form on the submit button.
+
+//tested full application. works :)

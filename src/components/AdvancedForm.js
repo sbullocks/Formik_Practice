@@ -25,7 +25,6 @@ const AdvancedForm = () => (
             value={props.values.name}
             name="name"
           />
-          {props.errors.name && <div id="feedback">{props.errors.name}</div>}
           <button type="submit">Submit</button>
         </form>
       )}
